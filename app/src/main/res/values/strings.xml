@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">AMazeByJamesYao</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Send</string>
+    <string name="maze_welcome">Welcome Human!</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="gen_algorithm">Maze Type</string>
+    <string name="rooms">Rooms Present</string>
+    <string name="revisit">Revisit</string>
+    <string name="explore">Explore</string>
 </resources>
