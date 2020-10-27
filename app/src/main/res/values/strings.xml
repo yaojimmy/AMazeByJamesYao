@@ -9,4 +9,8 @@
     <string name="revisit">Revisit</string>
     <string name="explore">Explore</string>
     <string name="temp_maze_replacement">Replacement for Maze</string>
+    <string name="temp_manually">Manually Play</string>
+    <string name="temp_animation">Animation Play</string>
+    <string name="temp_manual_title">Manual State</string>
+    <string name="temp_animation_title">Animation State</string>
 </resources>

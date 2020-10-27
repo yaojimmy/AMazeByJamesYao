@@ -9,9 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".gui.PlayAnimationActivity"
+            android:parentActivityName=".gui.GeneratingActivity">
+        </activity>
+        <activity android:name=".gui.PlayManuallyActivity"
+            android:parentActivityName=".gui.GeneratingActivity">
+        </activity>
         <activity android:name=".gui.GeneratingActivity"
             android:parentActivityName=".gui.AMazeActivity">
-
         </activity>
         <activity android:name=".gui.AMazeActivity">
             <intent-filter>
