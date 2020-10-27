@@ -15,6 +15,15 @@
     <string name="temp_animation_title">Animation State</string>
     <string name="winning_title">You Won!</string>
     <string name="losing_title">You\'ve been captured!</string>
-    <string name="win_option">You Win</string>
-    <string name="lose_option">You Lose</string>
+    <string name="win_option">Go2Winning</string>
+    <string name="lose_option">Go2Losing</string>
+    <string-array
+        name="select_generation_alg">
+        <item
+            >Eller</item>
+        <item
+            >Prim</item>
+        <item
+            >DFS</item>
+    </string-array>
 </resources>
