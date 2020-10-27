@@ -19,7 +19,7 @@ public class AMazeActivity extends AppCompatActivity {
         setContentView(R.layout.mazeactivity_main);
     }
 
-    /** Called when the user taps the "Send" button */
+    /** Called when the user taps the "Explore" (or "Revisit") button */
     public void explore(View view) {
         // do something in response to the button
         Intent intent = new Intent(this, GeneratingActivity.class);
