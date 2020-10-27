@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,13 +19,19 @@ public class GeneratingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generating);
 
-        // Get the Intent that started this activity and extract the string
-        //Intent intent = getIntent();
-        //String message = intent.getStringExtra(AMazeActivity.EXPLORE_MESSAGE);
+        // Get the Intent that started this activity and extract the extras
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+
+        // get the values selected by users in the title screen
+        int difficulty = extras.getInt(AMazeActivity.DIFFICULTY);
+        String maze_type = extras.getString(AMazeActivity.MAZE_TYPE);
+        boolean rooms = extras.getBoolean(AMazeActivity.ROOMS);
 
         // Capture the layout's TextView and set the string as its text
-        //TextView textView = findViewById(R.id.textView);
-        //textView.setText(message);
+        TextView textView = findViewById(R.id.textView11);
+        String message = "Difficulty: " + difficulty + " Maze Type: " + maze_type + " Rooms: " + rooms;
+        textView.setText(message);
     }
 
     /** Called when the user taps the "Play Manually" button */
