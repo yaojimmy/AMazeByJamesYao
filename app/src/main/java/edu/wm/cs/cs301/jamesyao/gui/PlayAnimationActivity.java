@@ -1,4 +1,15 @@
 package edu.wm.cs.cs301.jamesyao.gui;
 
-public class PlayAnimationActivity {
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import edu.wm.cs.cs301.jamesyao.R;
+
+public class PlayAnimationActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_animation_playing);
+    }
 }
