@@ -26,4 +26,26 @@
         <item
             >DFS</item>
     </string-array>
+    <string-array
+        name="driver_selection">
+        <item
+            >You</item>
+        <item
+            >Wizard</item>
+        <item
+            >WallFollower</item>
+    </string-array>
+    <string-array
+        name="robot_quality">
+        <item
+            >Premium</item>
+        <item
+            >Mediocre</item>
+        <item
+            >Soso</item>
+        <item
+            >Shaky</item>
+    </string-array>
+    <string name="driver_selection_label">Select Driver:</string>
+    <string name="robot_quality_label">Choose Robot Quality</string>
 </resources>
