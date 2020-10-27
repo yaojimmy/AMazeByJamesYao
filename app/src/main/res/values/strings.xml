@@ -13,4 +13,6 @@
     <string name="temp_animation">Animation Play</string>
     <string name="temp_manual_title">Manual State</string>
     <string name="temp_animation_title">Animation State</string>
+    <string name="winning_title">You Won!</string>
+    <string name="losing_title">You\'ve been captured!</string>
 </resources>
