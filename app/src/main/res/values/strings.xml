@@ -15,4 +15,6 @@
     <string name="temp_animation_title">Animation State</string>
     <string name="winning_title">You Won!</string>
     <string name="losing_title">You\'ve been captured!</string>
+    <string name="win_option">You Win</string>
+    <string name="lose_option">You Lose</string>
 </resources>

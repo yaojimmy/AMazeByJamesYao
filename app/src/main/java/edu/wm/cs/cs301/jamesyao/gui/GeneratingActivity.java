@@ -41,7 +41,7 @@ public class GeneratingActivity extends AppCompatActivity {
         // do something in response to the button
         Intent intent = new Intent(this, PlayAnimationActivity.class);
         ProgressBar progressBar = findViewById(R.id.progressBar);
-        intent.putExtra(MANUAL_MESSAGE, progressBar.getProgress());
+        intent.putExtra(ANIMATION_MESSAGE, progressBar.getProgress());
         startActivity(intent);
     }
 }
