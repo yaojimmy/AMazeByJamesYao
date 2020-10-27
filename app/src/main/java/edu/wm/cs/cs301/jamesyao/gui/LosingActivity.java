@@ -10,6 +10,6 @@ public class LosingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_losing);
+        setContentView(R.layout.activity_losing);
     }
 }
