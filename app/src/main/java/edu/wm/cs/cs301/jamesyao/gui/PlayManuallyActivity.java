@@ -37,4 +37,12 @@ public class PlayManuallyActivity extends AppCompatActivity {
         intent.putExtra(LOSING_MESSAGE, textView.getText());
         startActivity(intent);
     }
+
+    /** Override back button to go to title activity */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, AMazeActivity.class));
+        finish();
+    }
 }
