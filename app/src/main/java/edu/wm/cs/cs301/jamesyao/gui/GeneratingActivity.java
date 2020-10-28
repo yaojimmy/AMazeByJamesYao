@@ -14,9 +14,9 @@ import edu.wm.cs.cs301.jamesyao.R;
 
 public class GeneratingActivity extends AppCompatActivity {
 
-    private static final String MANUAL_MESSAGE = "edu.wm.cs.cs301.jamesyao.MANUAL";
-    private static final String ANIMATION_MESSAGE = "edu.wm.cs.cs301.jamesyao.ANIMATION";
-    private static final String TAG = "CodeRunner";
+    public static final String MANUAL_MESSAGE = "edu.wm.cs.cs301.jamesyao.MANUAL";
+    public static final String ANIMATION_MESSAGE = "edu.wm.cs.cs301.jamesyao.ANIMATION";
+    public static final String TAG = "CodeRunner";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -59,4 +59,5 @@
     <string name="animation_remaining_energy_label">Remaining Energy:</string>
     <string name="animation_start_stop_label">Start/Pause:</string>
     <string name="animation_speed_label">Animation Speed:</string>
+    <string name="path_length_energy_info">Path length and energy info</string>
 </resources>
