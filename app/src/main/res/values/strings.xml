@@ -8,7 +8,7 @@
     <string name="rooms">Rooms Present</string>
     <string name="revisit">Revisit</string>
     <string name="explore">Explore</string>
-    <string name="temp_maze_replacement">Replacement for Maze</string>
+    <string name="temp_maze_replacement">Shortcut</string>
     <string name="temp_manually">Manually Play</string>
     <string name="temp_animation">Animation Play</string>
     <string name="temp_manual_title">Manual State</string>
@@ -48,11 +48,15 @@
     </string-array>
     <string name="driver_selection_label">Select Driver:</string>
     <string name="robot_quality_label">Choose Robot Quality:</string>
-    <string name="map_label">Map</string>
+    <string name="map_label">Show Map</string>
     <string name="solution_label">Solution</string>
     <string name="visible_label">Visible</string>
     <string name="jump_button">Jump</string>
     <string name="forward_button">Forward</string>
     <string name="left_button">Left</string>
     <string name="right_button">Right</string>
+    <string name="end_screen_directions">Press the back button to return to main screen.</string>
+    <string name="animation_remaining_energy_label">Remaining Energy:</string>
+    <string name="animation_start_stop_label">Start/Pause:</string>
+    <string name="animation_speed_label">Animation Speed:</string>
 </resources>
