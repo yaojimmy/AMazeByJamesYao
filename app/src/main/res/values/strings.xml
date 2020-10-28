@@ -47,5 +47,5 @@
             >Shaky</item>
     </string-array>
     <string name="driver_selection_label">Select Driver:</string>
-    <string name="robot_quality_label">Choose Robot Quality</string>
+    <string name="robot_quality_label">Choose Robot Quality:</string>
 </resources>
