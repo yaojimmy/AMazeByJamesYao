@@ -12,7 +12,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-public class MazePanel extends View {
+public class MazePanel extends View implements P5Panel{
 
     // set paints for each needed color
     private Paint mazePaint; // temporary until I can figure out what Paint objects are necessary
@@ -63,7 +63,36 @@ public class MazePanel extends View {
         // does whatever it's usually supposed to do first
         super.onDraw(canvas);
 
-        canvas.drawColor(Color.BLUE);
+        myTestImage(canvas);
+    }
+
+    private void myTestImage(Canvas c) {
+        // set mazeCanvas equal to canvas so it appears during test
+        mazeCanvas = c;
+
+        // paint red ball
+        mazePaint.setColor(Color.RED);
+        addFilledOval(0, 0, 100, 100);
+
+        // paint green ball
+        mazePaint.setColor(Color.GREEN);
+        addFilledOval(120, 0, 100, 100);
+
+        // paint yellow rectangle
+        mazePaint.setColor(Color.YELLOW);
+        addFilledRectangle(240, 0, 150, 100);
+
+        // paint blue polygon
+        mazePaint.setColor(Color.BLUE);
+        int[] xPoints = new int[] {120, 240, 180};
+        int[] yPoints = new int[] {120, 120, 240};
+        addFilledPolygon(xPoints, yPoints, 3);
+
+        // paint some lines
+        mazePaint.setColor(Color.MAGENTA);
+        addLine(50, 250, 350, 250);
+        mazePaint.setColor(Color.LTGRAY);
+        addLine(50, 350, 300, 270);
     }
 
     @Override
@@ -163,10 +192,12 @@ public class MazePanel extends View {
 
     }
 
+    @Override
     public void commit() {
 
     }
 
+    @Override
     public boolean isOperational() {
         if (mazeCanvas != null) {
             return true;
@@ -179,6 +210,7 @@ public class MazePanel extends View {
     /**
      * @param rgb value of color
      */
+    @Override
     public void setColor(int rgb) {
         mazePaint.setColor(rgb);
     }
@@ -194,6 +226,7 @@ public class MazePanel extends View {
     /**
      * @return rgb value of color
      */
+    @Override
     public int getColor() {
         return mazePaint.getColor();
     }
@@ -211,10 +244,11 @@ public class MazePanel extends View {
         GRAY,
         BLACK,
         RED,
-        YELLOW
+        YELLOW,
+        GREEN
     }
     /**
-     * @param color
+     * @param color an enumerated common color (for convenience)
      * @return
      */
     public static int getColor(CommonColors color) {
@@ -229,6 +263,8 @@ public class MazePanel extends View {
                 return Color.RED;
             case YELLOW:
                 return Color.YELLOW;
+            case GREEN:
+                return Color.GREEN;
         }
         return 0;
     }
@@ -288,6 +324,7 @@ public class MazePanel extends View {
     private static final int RGB_DEF = 20;
     private static final int RGB_DEF_GREEN = 60;
 
+    @Override
     public int getWallColor(int distance, int cc, int extensionX) {
         // compute rgb value, depends on distance and x direction
         final int part1 = distance & 7;
@@ -328,6 +365,7 @@ public class MazePanel extends View {
      * Colors transition from black to gold and from grey to green.
      * @param percentToExit gives the distance to exit
      */
+    @Override
     public void addBackground(float percentToExit) {
         // black rectangle in upper half of screen
         mazePaint.setColor(getBackgroundColor(percentToExit, true));
@@ -377,6 +415,7 @@ public class MazePanel extends View {
         return Color.argb((int) a, (int) r, (int) g, (int) b);
     }
 
+    @Override
     public void addFilledRectangle(int x, int y, int width, int height) {
         mazePaint.setStyle(Paint.Style.FILL);
         mazeCanvas.drawRect((float)x, (float)y, (float)x+width, (float)y+height, mazePaint);
@@ -384,6 +423,7 @@ public class MazePanel extends View {
 
     private final Path polygonpath = new Path();
 
+    @Override
     public void addFilledPolygon(int[] xPoints, int[] yPoints, int nPoints) {
         mazePaint.setStyle(Paint.Style.FILL);
 
@@ -397,6 +437,7 @@ public class MazePanel extends View {
         mazeCanvas.drawPath(polygonpath, mazePaint);
     }
 
+    @Override
     public void addPolygon(int[] xPoints, int[] yPoints, int nPoints) {
         mazePaint.setStyle(Paint.Style.STROKE);
 
@@ -410,20 +451,24 @@ public class MazePanel extends View {
         mazeCanvas.drawPath(polygonpath, mazePaint);
     }
 
+    @Override
     public void addLine(int startX, int startY, int endX, int endY) {
         mazeCanvas.drawLine(startX, startY, endX, endY, mazePaint);
     }
 
+    @Override
     public void addFilledOval(int x, int y, int width, int height) {
         mazePaint.setStyle(Paint.Style.FILL);
         mazeCanvas.drawOval(x, y, x+width, y+height, mazePaint);
     }
 
+    @Override
     public void addArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
         // useCenter is false for now, will change to true if there is supposed to be a center
         mazeCanvas.drawArc(x, y, x+width, y+height, startAngle, arcAngle, false, mazePaint);
     }
 
+    @Override
     public void addMarker(float x, float y, String str) {
         /*
         Font f = new Font(fontName, fontStyle, fontSize);
@@ -443,7 +488,8 @@ public class MazePanel extends View {
      * @param hintKey an enumerated RenderingHints key
      * @param hintValue an enumerated RenderingHints value
      */
-    //public void setRenderingHint(RenderingHints hintKey, RenderingHints hintValue) {
+    @Override
+    public void setRenderingHint(RenderingHints hintKey, RenderingHints hintValue) {
         /*
         switch (hintKey) {
             case KEY_RENDERING:
@@ -485,5 +531,5 @@ public class MazePanel extends View {
         }
 
          */
-    //}
+    }
 }
