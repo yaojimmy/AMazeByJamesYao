@@ -118,7 +118,7 @@ public class MazePanel extends View implements P5Panel{
     }
     /**
      * Method to draw the bitmap on a canvas object that is
-     * obtained from the superclass.
+     * (not) obtained from the superclass.
      * Warning: do not override getGraphics() or drawing might fail.
      */
     public void update() {
@@ -137,7 +137,7 @@ public class MazePanel extends View implements P5Panel{
             System.out.println("MazePanel.paint: no canvas object, skipping drawImage operation");
         }
         else {
-            RectF rect = new RectF();
+            RectF rect = new RectF(0, 0, bitmapWidth, bitmapHeight);
             c.drawBitmap(bitmap, null, rect, mazePaint);
         }
     }
