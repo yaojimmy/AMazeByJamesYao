@@ -195,7 +195,7 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
 
     @Override
     public void deliver(Maze mazeConfig) {
-
+        MazeHolder.setMaze(mazeConfig);
     }
 
     @Override
@@ -205,10 +205,14 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
             final Spinner driver = findViewById(R.id.spinner);
             final Spinner robot = findViewById(R.id.spinner3);
             Intent intent_send;
+
+            // goes to manual activity if "You" is selected, otherwise goes to Animation Activity
             if (driver.getSelectedItem().toString().equals("You"))
                 intent_send = new Intent(this, PlayManuallyActivity.class);
             else
                 intent_send = new Intent(this, PlayAnimationActivity.class);
+
+            // sends driver and robot info
             Bundle extras_send = new Bundle();
             extras_send.putString(DRIVER, driver.getSelectedItem().toString());
             extras_send.putString(ROBOT, robot.getSelectedItem().toString());

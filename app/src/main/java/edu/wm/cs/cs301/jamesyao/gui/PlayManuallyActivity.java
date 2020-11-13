@@ -9,11 +9,23 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.wm.cs.cs301.jamesyao.R;
+import edu.wm.cs.cs301.jamesyao.generation.Maze;
 
 public class PlayManuallyActivity extends AppCompatActivity {
 
     public static final int TEMP_PATH_LENGTH = 2;
     public static final int TEMP_SHORTEST_PATH_LENGTH = 1;
+
+    FirstPersonView firstPersonView;
+    Map mapView;
+    MazePanel panel;
+
+    Maze mazeConfig;
+
+    private boolean showMaze;           // toggle switch to show overall maze on screen
+    private boolean showSolution;       // toggle switch to show solution in overall maze on screen
+    private boolean mapMode; // true: display map of maze, false: do not display map of maze
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
