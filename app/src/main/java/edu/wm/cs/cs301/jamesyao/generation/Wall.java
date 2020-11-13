@@ -77,7 +77,7 @@ public class Wall {
     /**
      * MazePanel object for all color-related functions.
      */
-    private MazePanel mazepanel = new MazePanel();
+    //private MazePanel mazepanel = new MazePanel();
 
     /**
      * Constructor assigns parameter values to instance variables.
@@ -152,7 +152,7 @@ public class Wall {
     private void initColor(final int distance, final int cc) {
         final int d = distance / 4;
         //System.out.println("Initcolor rgb: " + rgbValue);
-        setColor(mazepanel.getWallColor(d, cc, getExtensionX()));
+        //setColor(mazepanel.getWallColor(d, cc, getExtensionX()));
     }
 
     /**
