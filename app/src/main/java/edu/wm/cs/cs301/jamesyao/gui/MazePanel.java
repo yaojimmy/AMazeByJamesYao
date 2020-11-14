@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -18,8 +19,6 @@ public class MazePanel extends View implements P5Panel{
     private Paint mazePaint; // temporary until I can figure out what Paint objects are necessary
     private Canvas mazeCanvas; // internal canvas that is drawn on until it needs to be sent
     private Bitmap bitmap; // internal bitmap
-    private int bitmapWidth; // stores bitmap width for creating bitmap
-    private int bitmapHeight; // stores bitmap height for creating bitmap
 
     public MazePanel() {
         super(null);
@@ -55,7 +54,10 @@ public class MazePanel extends View implements P5Panel{
      */
     private void init(@Nullable AttributeSet attrs) {
         // assigns (temporary) mazePaint object, have not assigned attributes yet
-        mazePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        this.mazePaint = new Paint();
+        this.bitmap = Bitmap.createBitmap(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, Bitmap.Config.ARGB_8888);
+        this.mazeCanvas = new Canvas(this.bitmap);
+
     }
 
     @Override
@@ -63,38 +65,41 @@ public class MazePanel extends View implements P5Panel{
         // does whatever it's usually supposed to do first
         super.onDraw(canvas);
 
-        myTestImage(canvas);
+        Log.v("Tag", "Triggered");
+        Bitmap temp = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
+        canvas.drawBitmap(temp, 0, 0, this.mazePaint);
+        //myTestImage(canvas);
     }
 
     private void myTestImage(Canvas c) {
         // set mazeCanvas equal to canvas so it appears during test
-        mazeCanvas = c;
+        this.mazeCanvas = c;
 
         // paint red ball
-        mazePaint.setColor(Color.RED);
+        this.mazePaint.setColor(Color.RED);
         addFilledOval(0, 0, 100, 100);
 
         // paint green ball
-        mazePaint.setColor(Color.GREEN);
+        this.mazePaint.setColor(Color.GREEN);
         addFilledOval(120, 0, 100, 100);
 
         // paint yellow rectangle
-        mazePaint.setColor(Color.YELLOW);
+        this.mazePaint.setColor(Color.YELLOW);
         addFilledRectangle(240, 0, 150, 100);
 
         // paint blue polygon
-        mazePaint.setColor(Color.BLUE);
+        this.mazePaint.setColor(Color.BLUE);
         int[] xPoints = new int[] {120, 240, 180};
         int[] yPoints = new int[] {120, 120, 240};
         addFilledPolygon(xPoints, yPoints, 3);
 
         // paint some lines
-        mazePaint.setColor(Color.MAGENTA);
+        this.mazePaint.setColor(Color.MAGENTA);
         addLine(50, 250, 350, 250);
-        mazePaint.setColor(Color.LTGRAY);
+        this.mazePaint.setColor(Color.LTGRAY);
         addLine(50, 350, 300, 270);
     }
-
+/*
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         // does whatever it's usually supposed to do first
@@ -111,7 +116,7 @@ public class MazePanel extends View implements P5Panel{
         bitmapWidth = MeasureSpec.getSize(widthMeasureSpec);
         bitmapHeight = MeasureSpec.getSize(heightMeasureSpec);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
+    }*/
 
     public void update(Canvas c) {
         paint(c);
@@ -137,8 +142,8 @@ public class MazePanel extends View implements P5Panel{
             System.out.println("MazePanel.paint: no canvas object, skipping drawImage operation");
         }
         else {
-            RectF rect = new RectF(0, 0, bitmapWidth, bitmapHeight);
-            c.drawBitmap(bitmap, null, rect, mazePaint);
+            Bitmap temp = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
+            c.drawBitmap(temp, 0, 0, mazePaint);
         }
     }
 
@@ -159,7 +164,7 @@ public class MazePanel extends View implements P5Panel{
         // if necessary instantiate and store a graphics object for later use
         if (null == mazeCanvas) {
             if (null == bitmap) {
-                bitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, Bitmap.Config.ARGB_8888);
+                bitmap = Bitmap.createBitmap(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, Bitmap.Config.ARGB_8888);
                 //bitmap = Bitmap.createBitmap(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, Bitmap.Config.ARGB_8888);
                 if (null == bitmap)
                 {
@@ -167,7 +172,7 @@ public class MazePanel extends View implements P5Panel{
                     return null; // still no buffer image, give up
                 }
             }
-            mazeCanvas = new Canvas(bitmap);
+            this.mazeCanvas = new Canvas(bitmap);
             // do rest when find equivalent of renderinghints
 
             //if (null == mazeCanvas) {
@@ -187,7 +192,7 @@ public class MazePanel extends View implements P5Panel{
              */
             //}
         }
-        return mazeCanvas;
+        return this.mazeCanvas;
 
 
     }
@@ -199,20 +204,18 @@ public class MazePanel extends View implements P5Panel{
 
     @Override
     public boolean isOperational() {
-        if (mazeCanvas != null) {
+        if (this.mazeCanvas != null) {
             return true;
         }
         return false;
     }
-
-    private Color col;
 
     /**
      * @param rgb value of color
      */
     @Override
     public void setColor(int rgb) {
-        mazePaint.setColor(rgb);
+        this.mazePaint.setColor(rgb);
     }
 
     /**
@@ -220,7 +223,7 @@ public class MazePanel extends View implements P5Panel{
      * @param rgba value
      */
     public void setColor(float[] rgba) {
-        mazePaint.setARGB((int)rgba[3], (int)rgba[0], (int)rgba[1], (int)rgba[2]);
+        this.mazePaint.setARGB((int)rgba[3], (int)rgba[0], (int)rgba[1], (int)rgba[2]);
     }
 
     /**
@@ -228,7 +231,7 @@ public class MazePanel extends View implements P5Panel{
      */
     @Override
     public int getColor() {
-        return mazePaint.getColor();
+        return this.mazePaint.getColor();
     }
 
     /**
@@ -368,12 +371,12 @@ public class MazePanel extends View implements P5Panel{
     @Override
     public void addBackground(float percentToExit) {
         // black rectangle in upper half of screen
-        mazePaint.setColor(getBackgroundColor(percentToExit, true));
-        mazePaint.setStyle(Paint.Style.FILL);
-        mazeCanvas.drawRect(0, 0, Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT/2, mazePaint);
+        this.mazePaint.setColor(getBackgroundColor(percentToExit, true));
+        this.mazePaint.setStyle(Paint.Style.FILL);
+        this.mazeCanvas.drawRect(0, 0, Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT/2, this.mazePaint);
         // grey rectangle in lower half of screen
-        mazePaint.setColor(getBackgroundColor(percentToExit, false));
-        mazeCanvas.drawRect(0, Constants.VIEW_HEIGHT/2, Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT/2, mazePaint);
+        this.mazePaint.setColor(getBackgroundColor(percentToExit, true));
+        this.mazeCanvas.drawRect(0, Constants.VIEW_HEIGHT/2, Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT/2, this.mazePaint);
     }
 
     // colors for background
@@ -417,55 +420,57 @@ public class MazePanel extends View implements P5Panel{
 
     @Override
     public void addFilledRectangle(int x, int y, int width, int height) {
-        mazePaint.setStyle(Paint.Style.FILL);
-        mazeCanvas.drawRect((float)x, (float)y, (float)x+width, (float)y+height, mazePaint);
+        this.mazePaint.setStyle(Paint.Style.FILL);
+        this.mazeCanvas.drawRect((float)x, (float)y, (float)x+width, (float)y+height, mazePaint);
     }
-
-    private final Path polygonpath = new Path();
 
     @Override
     public void addFilledPolygon(int[] xPoints, int[] yPoints, int nPoints) {
-        mazePaint.setStyle(Paint.Style.FILL);
+        this.mazePaint.setStyle(Paint.Style.FILL);
 
         // makes polygon through polygon path
+        Path polygonpath = new Path();
         polygonpath.reset();
         polygonpath.moveTo(xPoints[0], yPoints[0]);
         for (int i = 1; i < nPoints; i++) {
             polygonpath.lineTo(xPoints[i], yPoints[i]);
         }
         polygonpath.lineTo(xPoints[0], yPoints[0]);
-        mazeCanvas.drawPath(polygonpath, mazePaint);
+        this.mazeCanvas.drawPath(polygonpath, this.mazePaint);
     }
 
     @Override
     public void addPolygon(int[] xPoints, int[] yPoints, int nPoints) {
-        mazePaint.setStyle(Paint.Style.STROKE);
+        this.mazePaint.setStyle(Paint.Style.STROKE);
 
         // makes polygon through polygon path
+        Path polygonpath = new Path();
         polygonpath.reset();
         polygonpath.moveTo(xPoints[0], yPoints[0]);
         for (int i = 1; i < nPoints; i++) {
             polygonpath.lineTo(xPoints[i], yPoints[i]);
         }
         polygonpath.lineTo(xPoints[0], yPoints[0]);
-        mazeCanvas.drawPath(polygonpath, mazePaint);
+        this.mazeCanvas.drawPath(polygonpath, this.mazePaint);
     }
 
     @Override
     public void addLine(int startX, int startY, int endX, int endY) {
-        mazeCanvas.drawLine(startX, startY, endX, endY, mazePaint);
+        this.mazePaint.setStyle(Paint.Style.STROKE);
+        this.mazeCanvas.drawLine(startX, startY, endX, endY, this.mazePaint);
     }
 
     @Override
     public void addFilledOval(int x, int y, int width, int height) {
-        mazePaint.setStyle(Paint.Style.FILL);
-        mazeCanvas.drawOval(x, y, x+width, y+height, mazePaint);
+        this.mazePaint.setStyle(Paint.Style.FILL);
+        this.mazeCanvas.drawOval(x, y, x+width, y+height, this.mazePaint);
     }
 
     @Override
     public void addArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
         // useCenter is false for now, will change to true if there is supposed to be a center
-        mazeCanvas.drawArc(x, y, x+width, y+height, startAngle, arcAngle, false, mazePaint);
+        this.mazePaint.setStyle(Paint.Style.STROKE);
+        this.mazeCanvas.drawArc(x, y, x+width, y+height, startAngle, arcAngle, false, this.mazePaint);
     }
 
     @Override
@@ -480,7 +485,8 @@ public class MazePanel extends View implements P5Panel{
 
         graphics.drawGlyphVector(gv, x, y);
         */
-        mazeCanvas.drawText(str, x, y, mazePaint);
+        this.mazePaint.setStyle(Paint.Style.STROKE);
+        this.mazeCanvas.drawText(str, x, y, this.mazePaint);
     }
 
     /*

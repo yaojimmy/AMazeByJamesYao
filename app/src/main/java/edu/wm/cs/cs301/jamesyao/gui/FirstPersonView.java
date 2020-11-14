@@ -3,6 +3,8 @@
  */
 package edu.wm.cs.cs301.jamesyao.gui;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import edu.wm.cs.cs301.jamesyao.generation.BSPBranch;
@@ -155,7 +157,7 @@ public class FirstPersonView {
 		mp.getBufferGraphics();
         // viewers draw on the buffer graphics
         if (!mp.isOperational()) {
-            System.out.println("FirstPersonDrawer.draw: can't get graphics object to draw on, skipping redraw operation") ;
+            Log.v("Tag", "FirstPersonDrawer.draw: can't get graphics object to draw on, skipping redraw operation") ;
             return;
         }
         
@@ -167,7 +169,7 @@ public class FirstPersonView {
         // draw background figure: black on bottom half, grey on top half
         mp.addBackground(percentToExit);
         // set color to white and draw what ever can be seen from the current position
-        mp.setColor(mp.getColor(CommonColors.WHITE));
+        mp.setColor(MazePanel.getColor(CommonColors.WHITE));
         // reset the set of ranges to a single new element (0,width-1)
         // to cover the full width of the view 
         // as we have not drawn any polygons (walls) yet.

@@ -78,21 +78,24 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ToggleButton
-        android:id="@+id/toggleButton2"
+        android:id="@+id/map_toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:checked="false"
+        android:onClick="mapButton"
         android:text="@string/map_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <ToggleButton
-        android:id="@+id/toggleButton3"
+        android:id="@+id/solution_toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="solutionButton"
         android:text="@string/solution_label"
-        app:layout_constraintBaseline_toBaselineOf="@+id/toggleButton2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/map_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -102,47 +105,52 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:text="@string/visible_label"
-        app:layout_constraintBaseline_toBaselineOf="@+id/toggleButton3"
+        app:layout_constraintBaseline_toBaselineOf="@+id/solution_toggle"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/forward_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="forwardButton"
         android:text="@string/forward_button"
-        app:layout_constraintBottom_toTopOf="@+id/button14"
-        app:layout_constraintStart_toEndOf="@+id/button14" />
+        app:layout_constraintBottom_toTopOf="@+id/left_button"
+        app:layout_constraintStart_toEndOf="@+id/left_button" />
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/jump_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:onClick="jumpButton"
         android:text="@string/jump_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button14"
+        android:id="@+id/left_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="leftButton"
         android:text="@string/left_button"
-        app:layout_constraintBottom_toTopOf="@+id/button13"
-        app:layout_constraintEnd_toStartOf="@+id/button13" />
+        app:layout_constraintBottom_toBottomOf="@+id/jump_button"
+        app:layout_constraintEnd_toStartOf="@+id/jump_button" />
 
     <Button
-        android:id="@+id/button15"
+        android:id="@+id/right_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="rightButton"
         android:text="@string/right_button"
-        app:layout_constraintBottom_toTopOf="@+id/button13"
-        app:layout_constraintStart_toEndOf="@+id/button13" />
+        app:layout_constraintBottom_toBottomOf="@+id/jump_button"
+        app:layout_constraintStart_toEndOf="@+id/jump_button" />
 
     <edu.wm.cs.cs301.jamesyao.gui.MazePanel
+        android:id="@+id/manualPanel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintTop_toBottomOf="@id/toggleButton3" />
+        app:layout_constraintTop_toBottomOf="@id/solution_toggle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -84,7 +84,9 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
         String message = "Difficulty: " + skillLevel + " Maze Type: " + maze_type + " Rooms: " + !perfect;
         textView.setText(message);
 
+        factory = new MazeFactory();
         updateProgressBar();
+        factory.waitTillDelivered();
         /*
          * Robot and driver declaration, which are initialized with their respective spinner values when this activity ends
          * Maze generation goes here
@@ -163,7 +165,6 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
     public void updateProgressBar() {
         new Thread(new Runnable() {
             public void run() {
-                factory = new MazeFactory();
                 factory.order(dummy());
             }
         }).start();
@@ -196,29 +197,27 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
     @Override
     public void deliver(Maze mazeConfig) {
         MazeHolder.setMaze(mazeConfig);
+        // switch to play activity
+        final Spinner driver = findViewById(R.id.spinner);
+        final Spinner robot = findViewById(R.id.spinner3);
+        Intent intent_send;
+
+        // goes to manual activity if "You" is selected, otherwise goes to Animation Activity
+        if (driver.getSelectedItem().toString().equals("You"))
+            intent_send = new Intent(this, PlayManuallyActivity.class);
+        else
+            intent_send = new Intent(this, PlayAnimationActivity.class);
+
+        // sends driver and robot info
+        Bundle extras_send = new Bundle();
+        extras_send.putString(DRIVER, driver.getSelectedItem().toString());
+        extras_send.putString(ROBOT, robot.getSelectedItem().toString());
+        intent_send.putExtras(extras_send);
+        startActivity(intent_send);
     }
 
     @Override
     public void updateProgress(int percentage) {
-        if (percentdone == 100) {
-            // switch to play activity
-            final Spinner driver = findViewById(R.id.spinner);
-            final Spinner robot = findViewById(R.id.spinner3);
-            Intent intent_send;
-
-            // goes to manual activity if "You" is selected, otherwise goes to Animation Activity
-            if (driver.getSelectedItem().toString().equals("You"))
-                intent_send = new Intent(this, PlayManuallyActivity.class);
-            else
-                intent_send = new Intent(this, PlayAnimationActivity.class);
-
-            // sends driver and robot info
-            Bundle extras_send = new Bundle();
-            extras_send.putString(DRIVER, driver.getSelectedItem().toString());
-            extras_send.putString(ROBOT, robot.getSelectedItem().toString());
-            intent_send.putExtras(extras_send);
-            startActivity(intent_send);
-        }
         if (this.percentdone < percentage && percentage <= 100) {
             this.percentdone = percentage;
             final ProgressBar progressBar = findViewById(R.id.progressBar);
